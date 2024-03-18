@@ -1,2 +1,5 @@
 # eslint-config
- Opinionated eslint set of rules
+
+> Opinionated eslint set of rules
+
+## Usage
