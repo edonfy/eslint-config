@@ -1,0 +1,26 @@
+{
+  "name": "@edonfy/eslint-config",
+  "version": "0.0.1",
+  "description": "edonfy eslint config",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint *.js"
+  },
+  "keywords": [
+    "eslint",
+    "lint",
+    "edonfy"
+  ],
+  "author": "edonfy",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.57.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:edonfy/eslint-config.git"
+  }
+}
