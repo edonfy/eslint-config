@@ -1,6 +1,6 @@
 {
   "name": "@edonfy/eslint-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "edonfy eslint config",
   "main": "index.js",
   "scripts": {
@@ -14,17 +14,18 @@
   "author": "edonfy",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.57.0"
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0"
   },
   "peerDependencies": {
-    "eslint": ">=8.57.0"
+    "eslint": ">=8.57.0",
+    "typescript-eslint": ">=7.3.1",
+    "eslint-plugin-vue": ">=9.23.0"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:edonfy/eslint-config.git"
-  },
-  "dependencies": {
-    "@babel/core": "^7.24.1",
-    "@babel/eslint-parser": "^7.24.1"
   }
 }
