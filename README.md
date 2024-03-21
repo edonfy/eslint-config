@@ -8,9 +8,10 @@
 npm i -D @edonfy/eslint-config
 ```
 
-Add it to `.eslintrc.js` file:
+Add it to `.eslintrc.cjs` file:
 
 ```js
+/* eslint-env node */
 const { edonfy } = require('@edonfy/eslint-config')
 
 module.exports = edonfy({
