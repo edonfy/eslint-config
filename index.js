@@ -9,6 +9,9 @@ const edonfy = ({ vue = false, ts = false, overrides = [], rules = {}, env = {},
     parserOptions: {
       sourceType: 'module',
       ecmaVersion: 'latest',
+      ecmaFeatures: {
+        jsx: true
+      }
     },
     extends: [
       'eslint:recommended',
@@ -47,6 +50,11 @@ const edonfy = ({ vue = false, ts = false, overrides = [], rules = {}, env = {},
     },
     overrides: [...overrides],
     globals: { ...globals },
+  }
+
+  if (vue) {
+    config.parser = 'vue-eslint-parser'
+    config.parserOptions.parser = 'espree'
   }
 
   if (ts) {
