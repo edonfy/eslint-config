@@ -1,11 +1,10 @@
 /* eslint-env node */
-
-const edonfy = (opts) => {
-  const options = Object.assign({ vue: false, ts: false }, opts)
+const edonfy = ({ vue = false, ts = false, overrides = [], rules = {}, env = {}, globals = {} }) => {
   const config = {
     env: {
       browser: true,
       es2021: true,
+      ...env,
     },
     parserOptions: {
       sourceType: 'module',
@@ -13,9 +12,14 @@ const edonfy = (opts) => {
     },
     extends: [
       'eslint:recommended',
+      ...(vue ? ['plugin:vue/vue3-essential'] : []),
     ],
-    plugins: [],
+    plugins: [
+      ...(ts ? ['@typescript-eslint'] : []),
+      ...(vue ? ['vue'] : []),
+    ],
     rules: {
+      // base
       indent: ['error', 2],
       quotes: ['error', 'single'],
       semi: ['error', 'never'],
@@ -24,48 +28,30 @@ const edonfy = (opts) => {
       'quote-props': ['error', 'as-needed'],
       'comma-dangle': ['error', 'only-multiline'],
       'no-unused-vars': 1,
+
+      // typescript
+      ...(ts ? {
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-unused-vars': 1,
+        '@typescript-eslint/no-explicit-any': 0,
+        '@typescript-eslint/ban-ts-comment': 0,
+      } : {}),
+
+      // vue
+      ...(vue ? {
+        'vue/multi-word-component-names': 0,
+      } : {}),
+
+      // 扩展
+      ...rules,
     },
+    overrides: [...overrides],
+    globals: { ...globals },
   }
 
-  if (options.ts) {
-    config.plugins.push('@typescript-eslint')
+  if (ts) {
     config.parserOptions.parser = '@typescript-eslint/parser'
     config.extends.push('plugin:@typescript-eslint/recommended')
-
-    const tsRules = {
-      '@typescript-eslint/no-var-requires': 0,
-      '@typescript-eslint/no-unused-vars': 1,
-      '@typescript-eslint/no-explicit-any': 0,
-      '@typescript-eslint/ban-ts-comment': 0,
-      // '@typescript-eslint/comma-dangle': ['error', 'only-multiline'],
-    }
-
-    Object.assign(config.rules, tsRules)
-  }
-
-  if (options.vue) {
-    config.plugins.push('vue')
-    config.extends.push('plugin:vue/vue3-essential')
-
-    const vueRules = {
-      'vue/multi-word-component-names': 0,
-    }
-
-    Object.assign(config.rules, vueRules)
-  }
-
-  const { overrides, rules, env } = options
-
-  if (overrides) {
-    config.overrides = overrides
-  }
-
-  if (rules) {
-    Object.assign(config.rules, rules)
-  }
-
-  if (env) {
-    Object.assign(config.env, env)
   }
 
   return config
